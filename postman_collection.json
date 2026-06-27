@@ -1,0 +1,230 @@
+{
+  "info": {
+    "_postman_id": "avisame-acca-soft-api",
+    "name": "🍽️ AvisameAccasoft API",
+    "description": "Colección completa de endpoints para AvisameAccasoft MVP",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "🏪 Restaurantes",
+      "item": [
+        {
+          "name": "Listar todos los restaurantes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/restaurants/",
+              "host": ["{{base_url}}"],
+              "path": ["restaurants", ""]
+            },
+            "description": "Obtiene la lista de todos los restaurantes disponibles"
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener menú del restaurante",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/restaurants/{{restaurant_id}}/menu/",
+              "host": ["{{base_url}}"],
+              "path": ["restaurants", "{{restaurant_id}}", "menu", ""]
+            },
+            "description": "Obtiene el menú completo con items disponibles del restaurante"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🪑 Mesas",
+      "item": [
+        {
+          "name": "Listar mesas por restaurante",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/tables/?restaurant={{restaurant_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["tables", ""],
+              "query": [
+                {
+                  "key": "restaurant",
+                  "value": "{{restaurant_id}}"
+                }
+              ]
+            },
+            "description": "Obtiene todas las mesas de un restaurante específico"
+          },
+          "response": []
+        },
+        {
+          "name": "Solicitar mesero",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer_id\": \"{{customer_id}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/tables/{{table_id}}/request-waiter/",
+              "host": ["{{base_url}}"],
+              "path": ["tables", "{{table_id}}", "request-waiter", ""]
+            },
+            "description": "Solicita un mesero a la mesa"
+          },
+          "response": []
+        },
+        {
+          "name": "Solicitar cuenta",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer_id\": \"{{customer_id}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/tables/{{table_id}}/request-bill/",
+              "host": ["{{base_url}}"],
+              "path": ["tables", "{{table_id}}", "request-bill", ""]
+            },
+            "description": "Solicita la cuenta a la mesa"
+          },
+          "response": []
+        },
+        {
+          "name": "Cancelar solicitud",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer_id\": \"{{customer_id}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/tables/{{table_id}}/cancel-request/",
+              "host": ["{{base_url}}"],
+              "path": ["tables", "{{table_id}}", "cancel-request", ""]
+            },
+            "description": "Cancela la solicitud activa de la mesa"
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener solicitud activa",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/tables/{{table_id}}/active-request/?customer_id={{customer_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["tables", "{{table_id}}", "active-request", ""],
+              "query": [
+                {
+                  "key": "customer_id",
+                  "value": "{{customer_id}}"
+                }
+              ]
+            },
+            "description": "Obtiene la solicitud activa (si existe) de la mesa"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "👤 Clientes",
+      "item": [
+        {
+          "name": "Registrar cliente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"Juan Pérez\",\n  \"phone_number\": \"3001234567\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/customers/register/",
+              "host": ["{{base_url}}"],
+              "path": ["customers", "register", ""]
+            },
+            "description": "Registra un nuevo cliente o actualiza uno existente. Devuelve el código de verificación (en desarrollo)."
+          },
+          "response": []
+        },
+        {
+          "name": "Verificar cliente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone_number\": \"3001234567\",\n  \"verification_code\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/customers/verify/",
+              "host": ["{{base_url}}"],
+              "path": ["customers", "verify", ""]
+            },
+            "description": "Verifica el código SMS del cliente y marca su teléfono como verificado"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000/api",
+      "type": "string"
+    },
+    {
+      "key": "restaurant_id",
+      "value": "550e8400-e29b-41d4-a716-446655440000",
+      "type": "string"
+    },
+    {
+      "key": "table_id",
+      "value": "550e8400-e29b-41d4-a716-446655440002",
+      "type": "string"
+    },
+    {
+      "key": "customer_id",
+      "value": "550e8400-e29b-41d4-a716-446655440003",
+      "type": "string"
+    }
+  ]
+}
